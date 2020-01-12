@@ -47,12 +47,7 @@ body {
 <h2>Please Enter Match Number and Venue</h2>
 <form name="update" action="UpdateServlet" method="post" onsubmit="return validateForm()">
 	<div align="left">
- 	 	<form method="get" onsubmit="updateResult.jsp">   
- 	 		<b><b>Who is updating?</b><br><br>
- 	 		<input type="radio" name="owner" value="Vishwas">Vishwas</input>
- 	 		<input type="radio" name="owner" value="Nikesh">Nikesh</input>
- 	 		<input type="radio" name="owner" value="Sushmith">Sushmith</input>
- 	 		<input type="radio" name="owner" value="Others">Others</input></b><br><br>        
+ 	 	<form method="get" onsubmit="updateResult.jsp">           
 			<b>Match Number&nbsp;</b>
 			<input type="number" name="matchNo"  style="width:150px;height:18px;"></input><br><br>
 			<b>Venue&emsp;&emsp;&emsp;&emsp;</b>

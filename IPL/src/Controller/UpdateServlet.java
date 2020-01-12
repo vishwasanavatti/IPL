@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Bean.*;
+import Bean.FixtureBean;
 import DAO.DAO;
 import java.util.ArrayList;
 /**
@@ -42,14 +42,12 @@ public class UpdateServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int matchNo=Integer.parseInt(request.getParameter("matchNo"));
 		String venue=request.getParameter("venue");
-		String owner=request.getParameter("owner");
-		String oppo=null;
 		DAO d = new DAO();
 		
 		String act=request.getParameter("action6");
 		if(act.equals("getUpdate"))
 		{
-			ArrayList<MatchResultBean> g=d.getUpdate(matchNo,venue,owner,oppo);
+			ArrayList<FixtureBean> g=d.getUpdate(matchNo,venue);
 			if(g.size()>0)
 			{
 				RequestDispatcher rd=request.getRequestDispatcher("updateResult.jsp");

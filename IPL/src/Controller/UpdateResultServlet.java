@@ -42,13 +42,10 @@ public class UpdateResultServlet extends HttpServlet {
 		String v=request.getParameter("venue");
 		String res=request.getParameter("result");
 		String act=request.getParameter("action7");
-		String oppo=request.getParameter("oppo");
-		String owner=request.getParameter("owner");
-		
 		DAO dao=new DAO();
 		if(act.equals("update"))
 		{
-			boolean b=dao.updateResult(mn,v,res,oppo,owner);
+			boolean b=dao.updateResult(mn,v,res);
 			if(b)
 			{
 				request.getRequestDispatcher("viewUpdateResult.jsp").forward(request, response);

@@ -6,24 +6,10 @@
 
 <%@page import="java.sql.*"%>
 <%@page import="Bean.FixtureBean"%>
-<%@page import="Bean.*"%>
+<%@page import="Bean.ResultBean"%>
 
 <html>
 <head>
-<script>
-function validateForm() {
-    var x = document.forms["New"]["oppo"].value;
-    var y = document.forms["New"]["result"].value;
-    if (x == "") {
-        alert("Please Select Opponent");
-        return false;
-    }
-    else if(y==""){
-    	alert("Please specify result");
-    	return false;
-    }
-}
-</script>
 <style>
 .button {
     background-color: #4CAF50;
@@ -57,9 +43,9 @@ body {
     padding: 8px;
 }
 
-#customers tr:nth-child(even){background-color: #ddd;}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
 
-#customers tr: {background-color: #ddd;}
+#customers tr:hover {background-color: #ddd;}
 
 #customers th {
     padding-top: 12px;
@@ -77,8 +63,6 @@ body {
 <div align="left">
 <table id="customers">
 <tr>
-<th>Player</th>
-<th>Opponent</th>
 <th>Match No</th>
 <th>Match Date</th>
 <th>Fixture</th>
@@ -86,15 +70,12 @@ body {
 <th>Ratio</th>
 <th>Played For</th>
 <th>Amount</th> 
-<!-- <th>Result</th> -->
 </tr>
 
-<% ArrayList<MatchResultBean> e=(ArrayList<MatchResultBean>)request.getAttribute("up");
-	for(MatchResultBean c:e)
+<% ArrayList<FixtureBean> e=(ArrayList<FixtureBean>)request.getAttribute("up");
+	for(FixtureBean c:e)
 	{
 %><tr>
-<td><%=c.getOwner1()%></td>
-<td><%=c.getOpponent()%></td>
 <td><%=c.getMatch_no()%></td>
 <td><%=c.getMatch_date()%></td>
 <td><%=c.getFixture() %></td>
@@ -102,40 +83,21 @@ body {
 <td><%=c.getRatio() %></td>
 <td><%=c.getBet_team() %></td>
 <td><%=c.getBet_amt() %></td>
-<!-- 		<b>Result &emsp;&nbsp;&nbsp;</b> -->
-<!-- 		 <input type="radio" name="result" value="win">Won&emsp; -->
-<!--   		 <input type="radio" name="result" value="loss">Lost<br><br> -->
-<!-- 		<td><select name="resut"> -->
-<!-- 		<option value="null"></option> -->
-<!-- 		<option value="win">Won</option> -->
-<!-- 		<option value="loss">Lost</option> -->
-<!-- 		</select></td>	 -->
 </tr>
 <%
 }
 %>
 </table><br><br>
 </div></form>
-<form name="New" action="UpdateResultServlet" method="post" onsubmit="return validateForm()">
-		<% session.setAttribute("res",request.getParameter("result"));%>
+<form action="UpdateResultServlet" method="post">
 		<input type="hidden" name="matchNo" value="<%=request.getParameter("matchNo")%>"/></input>
-		<input type="hidden" name="owner" value="<%=request.getParameter("owner")%>"/></input>
-		<input type="hidden" name="venue" value="<%=request.getParameter("venue").toString()%>"/></input><br>
-<%-- 		<input type="text" name="" value="<%=request.getParameter("oppo") %>"></input> --%>
-<%-- 		<input type="text" name="res" value="<%=request.getParameter("res")%>"/> --%>
-		<% ArrayList<MatchResultBean> r=(ArrayList<MatchResultBean>)request.getAttribute("up");
-	for(MatchResultBean p:r)
-	{
-		String arr=p.getOpponent();				
-%>		
-		
-		<input type="radio" name="oppo" value="<%=arr%>"><b><%=arr%></b></input>
-<% } %> &emsp; 
-		<br><br><b>Result &emsp;&nbsp;&nbsp;</b> 
- 			 <input type="radio" name="result" value="win"><b>Won</b> &emsp;
-			 <input type="radio" name="result" value="loss"><b>Lost</b><br><br>		
-		<button class="button button4 "type="submit" name="action7" value="update">Update</button>
-
+		<input type="hidden" name="venue" value="<%=request.getParameter("venue").toString()%>"/></input>
+		<br><br>
+		<b>Result &emsp;&nbsp;&nbsp;</b>
+		 <input type="radio" name="result" value="win">Won&emsp;
+  		 <input type="radio" name="result" value="loss">Lost<br><br>
+		 <button class="button button4 "type="submit" name="action7" value="update">Update</button>
 </form>
+
 </body>
 </html>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.DAO;
-import Bean.*;
+import Bean.FixtureBean;
 import Bean.ResultBean;
 import java.util.ArrayList;
 /**
@@ -41,14 +41,14 @@ public class ViewServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String own=request.getParameter("owner");
+		
 		DAO d=new DAO();
 		String action=request.getParameter("action2");
 		if(action.equals("Results"))
 		{
-		 ArrayList<MatchResultBean> a1=d.viewResult(own);
+		 ArrayList<FixtureBean> a1=d.viewResult();
 		 RequestDispatcher rd=request.getRequestDispatcher("previousResult.jsp");
-		for (MatchResultBean c:a1)
+		for (FixtureBean c:a1)
 		{
 			System.out.println(c.getBet_amt());
 		}

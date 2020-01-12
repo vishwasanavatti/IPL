@@ -19,11 +19,6 @@ body {
     margin: 4px 2px;
     cursor: pointer;
 }
-.button2 {background-color: #008CBA;} /* Blue */
-.button3 {background-color: #f44336;} /* Red */ 
-.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
-.button5 {background-color: #555555;} /* Black */
-
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Result</title>
@@ -32,19 +27,16 @@ body {
 <h2>&emsp;&emsp;Result</h2>
 
 <div style="width: 30%; margin: 0px auto;">
-	<a href="getStats.jsp"><button class="button" type="button" >Stats</button></a><br>
+	<a href="getNetAmount.jsp"><button class="button" type="button" >Stats</button></a><br>
 </div>
 <!-- <a href="previousResult.jsp">Previous Results</a>&emsp; -->
-<!-- <div style="width: 30%; margin: 0px auto;"><form action="ViewServlet" method="post" > -->
-<!--       <br> <button class="button" type="submit" name="action2"  value="Results" ">View Result</button><br><br> -->
-<!-- </form></div> -->
-<div style="width: 30%; margin: 0px auto;">
-      <br> <a href="viewOnSelect.jsp"><button class="button" type="button">View Result</button></a><br><br> 
+<div style="width: 30%; margin: 0px auto;"><form action="ViewServlet" method="post" >
+      <br> <button class="button" type="submit" name="action2"  value="Results" ">View Result</button><br><br>
 </form></div>
 <div style="width: 30%; margin: 0px auto;">
-	<a href="getUpdateResult.jsp"><button class="button" class="button" type="button">Update Result</button></a>&emsp;
+	<a href="getUpdateResult.jsp"><button class="button" type="button">Update Result</button></a>&emsp;
 </div>
 <br>
-&emsp;&emsp;<a href="Home.jsp"><button class="button button4"type="button">Home</button></a>
+&emsp;&emsp;<a href="Home.jsp"><button type="button"style="width:80px;height:25px;">Home</button></a>
 </body>
 </html>

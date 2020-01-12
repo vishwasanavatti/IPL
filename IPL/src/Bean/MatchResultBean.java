@@ -5,7 +5,6 @@ import java.util.Date;
 public class MatchResultBean {
 	private int Sl_No;
 	private String owner1;
-	private String opponent;
 	private int Match_no;
 	private Date match_date;
 	private String Fixture;
@@ -15,15 +14,6 @@ public class MatchResultBean {
 	private String bet_team;
 	private String res;
 	private int match_amt;
-	
-	
-	
-	public String getOpponent() {
-		return opponent;
-	}
-	public void setOpponent(String opponent) {
-		this.opponent = opponent;
-	}
 	public int getSl_No() {
 		return Sl_No;
 	}

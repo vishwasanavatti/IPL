@@ -6,9 +6,9 @@
 
 package DAO;
 import java.sql.*;
-import java.util.Date;
+
 import Bean.FixtureBean;
-import Bean.*;
+import Bean.NewBean;
 import Bean.ResultBean;
 import DB.SQLConnection;
 import java.util.ArrayList;
@@ -17,27 +17,14 @@ public class DAO {
 	
 	 Connection con=null;
 	
-	 public static boolean add(MatchResultBean t){
+	 public static boolean add(ResultBean t){
 		 SQLConnection db=new SQLConnection();
 			int j=0;
 			try{
 				Connection con=db.getConnection();
 				
-				PreparedStatement pst=con.prepareStatement("Insert match_result values(?,?,?,?,?,?,?,?,?,?,?)");
-				pst.setInt(1,t.getMatch_no());
-				java.util.Date utilDate = t.getMatch_date();
-			    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-			    pst.setString(1, t.getOwner1());
-			    pst.setString(2, t.getOpponent());
-			    pst.setInt(3, t.getMatch_no());
-				pst.setDate(4,  sqlDate);
-				pst.setString(5, t.getFixture());
-				pst.setString(6, t.getVenue());
-				pst.setFloat(7, t.getRatio());
-				pst.setString(8, t.getBet_team());
-				pst.setInt(9, t.getBet_amt());
-				pst.setString(10, "");
-				pst.setInt(11, 0);
+				PreparedStatement pst=con.prepareStatement("update fixtures set ratio="+t.getRatio()+",bet_on='"+t.getBet_team()+"', bet_amount="+t.getBet_amt()+" where  venue='"+t.getVenue()+"'and match_no="+t.getMatch_no());
+			
 				j=pst.executeUpdate();
 			}catch(SQLException e){
 				e.printStackTrace();
@@ -87,34 +74,24 @@ public class DAO {
 			}
 		return a;
 	}
-    public  ArrayList<MatchResultBean> viewResult(String owner){
-		ArrayList<MatchResultBean> a=new ArrayList<MatchResultBean>();
+    public  ArrayList<FixtureBean> viewResult(){
+		ArrayList<FixtureBean> a=new ArrayList<FixtureBean>();
 		SQLConnection db=new SQLConnection();
 		try{
 			con=db.getConnection();
 			Statement st=con.createStatement();
-			ResultSet rs=null;
-			if(owner==null)
-			{	
-			 rs=st.executeQuery("select * from match_result;");
-			}
-			else
-			{
-				 rs=st.executeQuery("select * from match_result where player='"+owner+"';");
-			}
+			ResultSet rs=st.executeQuery("select * from fixtures;");
 			while(rs.next()){
-				MatchResultBean m=new MatchResultBean();
-				m.setOwner1(rs.getString(2));
-				m.setOpponent(rs.getString(3));
-				m.setMatch_no(rs.getInt(4));
-				m.setMatch_date(rs.getDate(5));
-				m.setFixture(rs.getString(6));
-				m.setVenue(rs.getString(7));
-				m.setRatio(rs.getFloat(8));
-				m.setBet_team(rs.getString(9));
-				m.setBet_amt(rs.getInt(10));
-				m.setRes(rs.getString(11));
-				m.setMatch_amt(rs.getInt(12));
+				FixtureBean m=new FixtureBean();
+				m.setMatch_no(rs.getInt(1));
+				m.setMatch_date(rs.getDate(2));
+				m.setFixture(rs.getString(3));
+				m.setVenue(rs.getString(4));
+				m.setRatio(rs.getFloat(5));
+				m.setBet_team(rs.getString(6));
+				m.setBet_amt(rs.getInt(7));
+				m.setResult(rs.getString(8));
+				m.setTot_amt(rs.getInt(9));
 				a.add(m);
 			}
 			}catch(SQLException e){
@@ -123,33 +100,23 @@ public class DAO {
 		return a;
 	}
     
-    public ArrayList<MatchResultBean> getUpdate(int matchNo,String venue,String owner,String oppo)
+    public ArrayList<FixtureBean> getUpdate(int matchNo,String venue)
     {
-    	ArrayList<MatchResultBean> g=new ArrayList<MatchResultBean>();
+    	ArrayList<FixtureBean> g=new ArrayList<FixtureBean>();
     	SQLConnection db=new SQLConnection();
 		try{
 			con=db.getConnection();
 			Statement st=con.createStatement();
-			ResultSet rs=null;
-			if(oppo==null)
-			{
-				rs=st.executeQuery("select * from match_result where venue='"+venue+"' and Player='"+owner+"' and  match_no="+matchNo);
-			}
-			else
-			{
-				rs=st.executeQuery("select * from match_result where venue='"+venue+"' and Player='"+owner+"' and  match_no="+matchNo+" and opponent='"+oppo+"';");
-			}
+			ResultSet rs=st.executeQuery("select * from fixtures where venue='"+venue+"' and match_no="+matchNo);
 			while(rs.next()){
-				MatchResultBean m=new MatchResultBean();
-				m.setOwner1(rs.getString(2));
-				m.setOpponent(rs.getString(3));
-				m.setMatch_no(rs.getInt(4));
-				m.setMatch_date(rs.getDate(5));
-				m.setFixture(rs.getString(6));
-				m.setVenue(rs.getString(7));
-				m.setRatio(rs.getFloat(8));
-				m.setBet_team(rs.getString(9));
-				m.setBet_amt(rs.getInt(10));
+				FixtureBean m=new FixtureBean();
+				m.setMatch_no(rs.getInt(1));
+				m.setMatch_date(rs.getDate(2));
+				m.setFixture(rs.getString(3));
+				m.setVenue(rs.getString(4));
+				m.setRatio(rs.getFloat(5));
+				m.setBet_team(rs.getString(6));
+				m.setBet_amt(rs.getInt(7));
 				g.add(m);
 			}
 			}catch(SQLException e){
@@ -158,13 +125,13 @@ public class DAO {
     	return g;
     }
     
-    public int getTotalAmount(String owner){
+    public int getTotalAmount(){
     	SQLConnection db=new SQLConnection();
     	int tot=0;
 		try{
 			 con=db.getConnection();
 			Statement st=con.createStatement();
-			ResultSet rs=st.executeQuery("select sum(match_amount) from match_result where player='"+owner+"';");
+			ResultSet rs=st.executeQuery("select sum(total_amount) from fixtures;");
 			while(rs.next()){
 				tot=rs.getInt(1);				
 			}
@@ -177,13 +144,13 @@ public class DAO {
 		return tot;
     }
     
-    public int getTotalloss(String owner){
+    public int getTotalloss(){
     	SQLConnection db=new SQLConnection();
     	int loss=0;
 		try{
 			 con=db.getConnection();
 			Statement st=con.createStatement();
-			ResultSet rs=st.executeQuery("select count(*) from match_result where MATCH_AMOUNT<0 and player='"+owner+"';");
+			ResultSet rs=st.executeQuery("select count(*) from fixtures where TOTAL_AMOUNT<0;");
 			while(rs.next()){
 				loss=rs.getInt(1);				
 			}
@@ -196,13 +163,13 @@ public class DAO {
 		return loss;
     }
     
-    public int getTotalmatches(String owner){
+    public int getTotalmatches(){
     	SQLConnection db=new SQLConnection();
     	int mat=0;
 		try{
 			 con=db.getConnection();
 			Statement st=con.createStatement();
-			ResultSet rs=st.executeQuery("select count(*) from match_result where MATCH_AMOUNT is not null and player='"+owner+"';");
+			ResultSet rs=st.executeQuery("select count(*) from fixtures where TOTAL_AMOUNT is not null;");
 			while(rs.next()){
 				mat=rs.getInt(1);				
 			}
@@ -215,13 +182,13 @@ public class DAO {
 		return mat;
     }
     
-    public int getTotalwin(String owner){
+    public int getTotalwin(){
     	SQLConnection db=new SQLConnection();
     	int win=0;
 		try{
 			 con=db.getConnection();
 			Statement st=con.createStatement();
-			ResultSet rs=st.executeQuery("select count(*) from match_result where MATCH_AMOUNT>0 and player='"+owner+"';");
+			ResultSet rs=st.executeQuery("select count(*) from fixtures where TOTAL_AMOUNT>0;");
 			while(rs.next()){
 				win=rs.getInt(1);				
 			}
@@ -234,14 +201,14 @@ public class DAO {
 		return win;
     }
     
-    public boolean updateResult(int matchNo,String venue,String result,String oppo,String owner)
+    public boolean updateResult(int matchNo,String venue,String result)
     {
     	SQLConnection db=new SQLConnection();
 		int j=0;
-		ArrayList<MatchResultBean> arr =new ArrayList<MatchResultBean>();
+		ArrayList<FixtureBean> arr =new ArrayList<FixtureBean>();
 		int tot_amt=0;
-		arr=this.getUpdate(matchNo,venue,owner,oppo);
-		for(MatchResultBean c:arr)
+		arr=this.getUpdate(matchNo, venue);
+		for(FixtureBean c:arr)
 		{
 			float ratio=c.getRatio();
 			int bet_amt=c.getBet_amt();
@@ -273,7 +240,7 @@ public class DAO {
 		}
 		try{
 			Connection con=db.getConnection();
-			PreparedStatement pst=con.prepareStatement("update match_result set result='"+result +"' , match_amount="+tot_amt+" where venue='"+venue+"' and player='"+owner+"' and opponent='"+oppo+"' and match_no="+matchNo);
+			PreparedStatement pst=con.prepareStatement("update fixtures set result='"+result +"' , total_amount="+tot_amt+"where venue='"+venue+"' and match_no="+matchNo);
 			j=pst.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -282,25 +249,6 @@ public class DAO {
 		return true;
 		else
 			return false;
-    }
-    
-    public String getVenue(String ven){
-    	SQLConnection db=new SQLConnection();
-    	String v=null;
-		try{
-			 con=db.getConnection();
-			Statement st=con.createStatement();
-			ResultSet rs=st.executeQuery("select count(*) from match_result where MATCH_AMOUNT is not null and player='"+ven+"';");
-			while(rs.next()){
-				v=rs.getString(1);				
-			}
-			}
-			catch(SQLException e)
-			{
-				System.out.println(e.getMessage());
-			}
-		
-		return v;
     }
     
 }

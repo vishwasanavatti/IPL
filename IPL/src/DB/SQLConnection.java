@@ -15,7 +15,7 @@ public class SQLConnection {
      */
 	private String url = "jdbc:sqlserver://localhost:1433"+";databaseName=IPL";
 	private String user = "Vishwas";
-	private String password = "Vish@12345";
+	private String password = "Vishwasputtu1";
 	private Connection connection=null;
 
 	public Connection getConnection() {

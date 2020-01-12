@@ -5,7 +5,7 @@
 <%@page import="java.util.ArrayList"%>
 
 <%@page import="java.sql.*"%>
-<%@page import="Bean.*"%>
+<%@page import="Bean.FixtureBean"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -24,7 +24,7 @@
 
 #customers tr:nth-child(even){background-color: #f2f2f2;}
 
-#customers tr: {background-color: #ddd;}
+#customers tr:hover {background-color: #ddd;}
 
 #customers th {
     padding-top: 12px;
@@ -36,35 +36,15 @@
 body {
     background-color: rgb(201, 76, 76);
 }
-.button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-.button2 {background-color: #008CBA;} /* Blue */
-.button3 {background-color: #f44336;} /* Red */ 
-.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
-.button5 {background-color: #555555;} /* Black */
-
 </style>
 </head>
 <body>
 <div align="center">
-<h2>Results</h2>
+<h2>Fixtures</h2>
 </div>      
- <a href="Home.jsp" ><button class="button button4" type="button">Home</button></a><br><br>
+ <a href="Home.jsp" ><button type="button">Home</button></a><br><br>
 <table id="customers">
 	<tr>
-		<th>Player</th>
-		<th>Opponent</th>
 		<th>Match Number</th>
 		<th>Match Date</th>
 		<th>Fixture</th>
@@ -75,12 +55,10 @@ body {
 		<th>Result</th>
 		<th>Match Amount</th>
 	</tr>
-<% ArrayList<MatchResultBean> e= (ArrayList<MatchResultBean>)request.getAttribute("result");
-	for(MatchResultBean c:e)
+<% ArrayList<FixtureBean> e= (ArrayList<FixtureBean>)request.getAttribute("result");
+	for(FixtureBean c:e)
 	{
 %><tr>
-	<td><%=c.getOwner1() %>
-	<td><%=c.getOpponent() %>
     <td><%=c.getMatch_no() %></td>
     <td><%=c.getMatch_date() %></td>
     <td><%=c.getFixture() %></td>
@@ -88,8 +66,8 @@ body {
     <td><%=c.getRatio() %></td>
     <td><%=c.getBet_team() %></td>
     <td><%=c.getBet_amt()%></td>
-    <td><%=c.getRes() %>
-    <td><%=c.getMatch_amt() %>
+    <td><%=c.getResult() %></td>
+    <td><%=c.getTot_amt() %></td>
   </tr>
 <%
 }
@@ -97,7 +75,7 @@ body {
 </table>
 </div><br>
        </form>
-<a href="viewOnSelect.jsp"><button class="button button4" type="button">Back</button></a>&emsp;
-<a href="Home.jsp" ><button class="button button4" type="button">Home</button></a>
+<a href="Result.jsp"><button type="button">Back</button></a>&emsp;
+<a href="Home.jsp" ><button type="button">Home</button></a>
 </body>
 </html>

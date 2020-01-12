@@ -5,18 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style>
-body {
-    background-image: url("<image>");
-
-}
-div.container {23:50:17  [Apache] 	Error: Apache shutdown unexpectedly.
-23:50:17  [Apache] 	This may be due to a blocked port, missing dependencies, 
-23:50:17  [Apache] 	improper privileges, a crash, or a shutdown by another method.
-23:50:17  [Apache] 	Press the Logs button to view error logs and check
-23:50:17  [Apache] 	the Windows Event Viewer for more clues
-23:50:17  [Apache] 	If you need more help, copy and post this
-23:50:18  [Apache] 	entire log window on the forums
-
+div.container {
 	display:inline-block;
     width: 100%;
     border: 1px solid gray;
@@ -70,10 +59,9 @@ article {
 </head>
 <title>IPL 2018</title>
 <body>
-<link rel="shortcut icon" href="<%=session.getAttribute("URL_HOST") %>/resources/C:\Users\MOON\Desktop\IPL-1.jpg" />
 	<header>        
         <img src="C:\Users\MOON\Desktop\IPL-1.jpg" alt="IPL LOGO" align="middle"
-        style="background-image: url("image");width:1200px;height:550px;" >
+        style="width:1200px;height:550px;">
     </header>
    
  <div class="main " ><br>

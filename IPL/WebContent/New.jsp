@@ -14,8 +14,6 @@
 function validateForm() {
     var x = document.forms["New"]["matchNo"].value;
     var y = document.forms["New"]["venue"].value;
-    var z= document.forms["New"]["owner"].value;
-    var xyz= document.forms["New"]["oppo"].value;
     if (x == "") {
         alert("Mention Match Number");
         return false;
@@ -24,21 +22,9 @@ function validateForm() {
     	alert("Please select Venue");
     	return false;
     }
-    else if(z==""){
-    	alert("Please select player");
-    	return false;
-    }
-    else if(xyz==""){
-    	alert("Please mention the opponent");
-    	return false;
-    }
 }
-
 </script>
 <style>
-img:active {
-    background-color: yellow;
-}
 header, footer {
     padding: 1em;
     color: white;
@@ -67,24 +53,6 @@ header, footer {
 body {
     background-color: rgb(201, 76, 76);
 }
-p.ex1 {
-    margin-left: 20px;
-}
-img {
-  border-radius: 50%;
-}
-label > input{ /* HIDE RADIO */
-  visibility: hidden; /* Makes input not-clickable */
-  position: absolute; /* Remove input from document flow */
-}
-label > input + img{ /* IMAGE STYLES */
-  cursor:pointer;
-  border:2px solid transparent;
-}
-label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
-  border:2px solid #f00;
-}
-
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
@@ -94,21 +62,18 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 
 <br>
  <form name="New" action="NewServlet" method="post" onsubmit="return validateForm()">
-     <div >
-     <p class="ex1">
+     <div align="left">
  	 	<form method="get" onsubmit="View.jsp"> 
- 	 		<b><b><font size="6">Please Choose Player</font></b><br><br>
- 	 		<label><input type="radio" name="owner" value="Vishwas" ><img src="D:\Photos\Random\IMG_3391.jpg" class="image" alt="Vishwas" style="width:150px"></input></label>
- 	 		<label><input type="radio" name="owner" value="Nikesh"><img src="D:\Photos\Homestay\DSC_0076.jpg" alt="Nikesh" style="width:150px"></input></label>
- 	 		<label><input type="radio" name="owner" value="Sushmith"><img src="D:\Photos\Homestay\DSC_0122.jpg" alt="Sushmith" style="width:150px"></input></label>
- 	 		<label><input type="radio" name="owner" value="Others"><img src="D:\Photos\Homestay\blank.png"   alt="Others" style="width:100px"></input></label></b><br><br>  
- 	 		<b>Opponent</b>&emsp;&emsp;&nbsp;&nbsp;
- 	 		<input type="text" name="oppo" style="width:152px;height:18px;" ></input><br><br>     
+ 	 		<b>Who is betting?
+ 	 		<input type="radio" name="owner" value="Vishwas">Vishwas</input>
+ 	 		<input type="radio" name="owner" value="Nikesh">Nikesh</input>
+ 	 		<input type="radio" name="owner" value="Sushmith">Sushmith</input>
+ 	 		<input type="radio" name="owner" value="Others">Others</input> </b><br><br>         
 			<b>Match Number&nbsp;</b>
-			<input type="number" name="matchNo" style="width:150px;height:19px;"></input><br><br>
-			<b>Venue&emsp;&emsp;&emsp;&emsp;&nbsp;</b>
+			<input type="number" name="matchNo" style="width:150px;height:18px;"></input><br><br>
+			<b>Venue&emsp;&emsp;&emsp;&emsp;</b>
 <!-- 			<input type="text" name="venue" ></input><br><br> -->
-			<select name="venue" style="width:155px;height:27px;"> 
+			<select name="venue" style="width:155px;height:25px;"> 
 			  <option value="Null" ></option>
 			  <option value="Mumbai" >Mumbai</option> 
 			  <option value="Mohali" >Mohali</option>
@@ -124,7 +89,6 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 			<a class ="button button4" href="Home.jsp">Home</a>
 			<br><br>
 		</form>
-		</p>
 	</div>
 </form>
 
