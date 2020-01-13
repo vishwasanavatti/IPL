@@ -8,16 +8,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="G:/Eclipse/servlet-api.jar"/>
-	<classpathentry kind="lib" path="D:/sqljdbc4.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/jar/sqlserverjdbc.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="E:/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="E:/sqlserverjdbc.jar"/>
+	<classpathentry kind="lib" path="E:/tomcat-servlet-api-7.0.93.wso2v1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
